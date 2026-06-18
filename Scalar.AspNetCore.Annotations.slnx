@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Scalar.AspNetCore.Annotations.UnitTests/Scalar.AspNetCore.Annotations.UnitTests.csproj" />
+  <Project Path="Scalar.AspNetCore.Annotations/Scalar.AspNetCore.Annotations.csproj" />
+</Solution>

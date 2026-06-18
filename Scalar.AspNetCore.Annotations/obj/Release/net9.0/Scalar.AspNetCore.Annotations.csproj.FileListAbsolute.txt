@@ -1,0 +1,14 @@
+C:\projects\priv\Scalar.AspNetCore.Annotations\Scalar.AspNetCore.Annotations\bin\Release\net9.0\Scalar.AspNetCore.Annotations.deps.json
+C:\projects\priv\Scalar.AspNetCore.Annotations\Scalar.AspNetCore.Annotations\bin\Release\net9.0\Scalar.AspNetCore.Annotations.dll
+C:\projects\priv\Scalar.AspNetCore.Annotations\Scalar.AspNetCore.Annotations\bin\Release\net9.0\Scalar.AspNetCore.Annotations.pdb
+C:\projects\priv\Scalar.AspNetCore.Annotations\Scalar.AspNetCore.Annotations\bin\Release\net9.0\Scalar.AspNetCore.Annotations.xml
+C:\projects\priv\Scalar.AspNetCore.Annotations\Scalar.AspNetCore.Annotations\obj\Release\net9.0\Scalar.AspNetCore.Annotations.csproj.AssemblyReference.cache
+C:\projects\priv\Scalar.AspNetCore.Annotations\Scalar.AspNetCore.Annotations\obj\Release\net9.0\Scalar.AspNetCore.Annotations.GeneratedMSBuildEditorConfig.editorconfig
+C:\projects\priv\Scalar.AspNetCore.Annotations\Scalar.AspNetCore.Annotations\obj\Release\net9.0\Scalar.AspNetCore.Annotations.AssemblyInfoInputs.cache
+C:\projects\priv\Scalar.AspNetCore.Annotations\Scalar.AspNetCore.Annotations\obj\Release\net9.0\Scalar.AspNetCore.Annotations.AssemblyInfo.cs
+C:\projects\priv\Scalar.AspNetCore.Annotations\Scalar.AspNetCore.Annotations\obj\Release\net9.0\Scalar.AspNetCore.Annotations.csproj.CoreCompileInputs.cache
+C:\projects\priv\Scalar.AspNetCore.Annotations\Scalar.AspNetCore.Annotations\obj\Release\net9.0\Scalar.AspNetCore.Annotations.dll
+C:\projects\priv\Scalar.AspNetCore.Annotations\Scalar.AspNetCore.Annotations\obj\Release\net9.0\refint\Scalar.AspNetCore.Annotations.dll
+C:\projects\priv\Scalar.AspNetCore.Annotations\Scalar.AspNetCore.Annotations\obj\Release\net9.0\Scalar.AspNetCore.Annotations.xml
+C:\projects\priv\Scalar.AspNetCore.Annotations\Scalar.AspNetCore.Annotations\obj\Release\net9.0\Scalar.AspNetCore.Annotations.pdb
+C:\projects\priv\Scalar.AspNetCore.Annotations\Scalar.AspNetCore.Annotations\obj\Release\net9.0\ref\Scalar.AspNetCore.Annotations.dll
