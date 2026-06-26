@@ -11,11 +11,23 @@ public static class ScalarSwashbuckleExtensions
     /// <summary>
     /// Adds Scalar attribute filters to the Swashbuckle OpenAPI generator pipeline.
     /// </summary>
+#if NET9_0
     public static SwaggerGenOptions AddScalarAnnotations(this SwaggerGenOptions options)
     {
+
         options.OperationFilter<ScalarSwashbuckleOperationFilter>();
         options.SchemaFilter<ScalarSwashbuckleSchemaFilter>();
 
         return options;
     }
+#elif NET10_0
+    public static SwaggerGenOptions AddScalarAnnotations(this SwaggerGenOptions options)
+    {
+
+        options.OperationFilter<ScalarSwashbuckleOperationFilter>();
+        options.SchemaFilter<ScalarSwashbuckleSchemaFilter>();
+
+        return options;
+    }
+#endif
 }

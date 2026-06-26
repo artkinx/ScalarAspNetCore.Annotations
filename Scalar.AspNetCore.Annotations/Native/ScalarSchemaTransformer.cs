@@ -2,15 +2,15 @@
 
 
 using Microsoft.AspNetCore.OpenApi;
+#if NET9_0
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
+#elif NET10_0
+using Microsoft.OpenApi;
+#endif
 using Scalar.AspNetCore.Annotations.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Reflection;
+using System.Text.Json.Nodes;
 
 namespace Scalar.AspNetCore.Annotations.Native
 {
@@ -46,7 +46,11 @@ namespace Scalar.AspNetCore.Annotations.Native
                 if (schemaAttribute.MockValue != null)
                 {
                     // Handle injecting the mock value into the schema extension or example property
+#if NET9_0
                     schema.Extensions["x-scalar-mock"] = new OpenApiString(schemaAttribute.MockValue.ToString());
+#elif NET10_0
+                    schema.Extensions?["x-scalar-mock"] = new JsonNodeExtension(JsonValue.Create(schemaAttribute.MockValue.ToString() ?? ""));
+#endif
                 }
             }
 

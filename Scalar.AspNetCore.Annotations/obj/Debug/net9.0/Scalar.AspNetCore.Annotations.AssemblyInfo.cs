@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute(("Declarative attributes for configuring Scalar OpenAPI documentation in .NET and S" +
     "washbuckle."))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0-preview.7+1130c5b4819a4788010b9f01797d532312509624")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0-preview.7+9d1f66ec9e1d1a8438bc756d6abd63eb242d55a5")]
 [assembly: System.Reflection.AssemblyProductAttribute("Scalar.AspNetCore.Annotations")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Scalar.AspNetCore.Annotations")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

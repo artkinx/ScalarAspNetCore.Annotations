@@ -158,7 +158,7 @@
             Transforms OpenAPI operations by inspecting endpoint metadata for Scalar-specific attributes and injecting corresponding OpenAPI extensions that Swashbuckle can utilize to enhance the generated documentation with badges, code samples, and exclusion flags.
             </summary>
         </member>
-        <member name="M:Scalar.AspNetCore.Annotations.Native.ScalarOperationTransformer.TransformAsync(Microsoft.OpenApi.Models.OpenApiOperation,Microsoft.AspNetCore.OpenApi.OpenApiOperationTransformerContext,System.Threading.CancellationToken)">
+        <member name="M:Scalar.AspNetCore.Annotations.Native.ScalarOperationTransformer.TransformAsync(Microsoft.OpenApi.OpenApiOperation,Microsoft.AspNetCore.OpenApi.OpenApiOperationTransformerContext,System.Threading.CancellationToken)">
             <summary>
             Transforms the given OpenAPI operation by extracting Scalar-specific attributes from the endpoint metadata and adding appropriate extensions to the operation definition. This allows Swashbuckle to recognize and render badges, code samples, and exclusion flags in the generated API documentation.
             </summary>
@@ -172,7 +172,7 @@
             Transforms OpenAPI schemas by inspecting type metadata for Scalar-specific attributes and injecting corresponding OpenAPI extensions that Swashbuckle can utilize to enhance the generated documentation with descriptions and mock values for scalar types.
             </summary>
         </member>
-        <member name="M:Scalar.AspNetCore.Annotations.Native.ScalarSchemaTransformer.TransformAsync(Microsoft.OpenApi.Models.OpenApiSchema,Microsoft.AspNetCore.OpenApi.OpenApiSchemaTransformerContext,System.Threading.CancellationToken)">
+        <member name="M:Scalar.AspNetCore.Annotations.Native.ScalarSchemaTransformer.TransformAsync(Microsoft.OpenApi.OpenApiSchema,Microsoft.AspNetCore.OpenApi.OpenApiSchemaTransformerContext,System.Threading.CancellationToken)">
             <summary>
             Transforms the given OpenAPI schema by checking for the presence of the <see cref="T:Scalar.AspNetCore.Annotations.Attributes.ScalarSchemaAttribute"/> on the underlying C# type and, if found, enriches the schema with the description and mock value specified in the attribute. This allows Swashbuckle to generate more informative documentation for scalar types, including custom descriptions and example values that can be displayed in the Scalar UI.
             </summary>
@@ -203,7 +203,7 @@
             Implements a Swashbuckle schema filter that inspects type metadata for the <see cref="T:Scalar.AspNetCore.Annotations.Attributes.ScalarSchemaAttribute"/> and enriches the OpenAPI schema definitions with corresponding descriptions and mock values. This filter allows developers to easily integrate Scalar-specific metadata into their API documentation by simply adding the <see cref="T:Scalar.AspNetCore.Annotations.Attributes.ScalarSchemaAttribute"/> to their C# classes or properties, enabling enhanced visualization and organization in the Scalar UI. By applying this filter, any schema that has the <see cref="T:Scalar.AspNetCore.Annotations.Attributes.ScalarSchemaAttribute"/> will have its description and example values properly reflected in the generated OpenAPI documentation, improving the overall developer experience when using the Scalar UI to explore API schemas.
             </summary>
         </member>
-        <member name="M:Scalar.AspNetCore.Annotations.Swashbuckle.ScalarSwashbuckleSchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
+        <member name="M:Scalar.AspNetCore.Annotations.Swashbuckle.ScalarSwashbuckleSchemaFilter.Apply(Microsoft.OpenApi.IOpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
             <summary>
             Applies the filter to enrich the OpenAPI schema based on the presence of the <see cref="T:Scalar.AspNetCore.Annotations.Attributes.ScalarSchemaAttribute"/> on the target type or its properties. The filter checks for the attribute at both the class and property levels, updating the schema's description and example values accordingly. This allows for seamless integration of Scalar-specific metadata into the API documentation, enhancing the clarity and usability of the generated OpenAPI specifications for clients consuming the API through the Scalar UI.
             </summary>
@@ -228,6 +228,50 @@
             <summary>
             Position the badge before the operation header.
             </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type)">
+            <summary>
+            Generates a documentation comment ID for a type.
+            Example: T:Namespace.Outer+Inner`1 becomes T:Namespace.Outer.Inner`1
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Reflection.PropertyInfo)">
+            <summary>
+            Generates a documentation comment ID for a property.
+            Example: P:Namespace.ContainingType.PropertyName or for an indexer P:Namespace.ContainingType.Item(System.Int32)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type,System.String)">
+            <summary>
+            Generates a documentation comment ID for a property given its container type and property name.
+            Example: P:Namespace.ContainingType.PropertyName
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Reflection.MethodInfo)">
+            <summary>
+            Generates a documentation comment ID for a method (or constructor).
+            For example:
+              M:Namespace.ContainingType.MethodName(ParamType1,ParamType2)~ReturnType
+              M:Namespace.ContainingType.#ctor(ParamType)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.GetTypeDocId(System.Type,System.Boolean,System.Boolean)">
+            <summary>
+            Generates a documentation ID string for a type.
+            This method handles nested types (replacing '+' with '.'),
+            generic types, arrays, pointers, by-ref types, and generic parameters.
+            The <paramref name="includeGenericArguments"/> flag controls whether
+            constructed generic type arguments are emitted, while <paramref name="omitGenericArity"/>
+            controls whether the generic arity marker (e.g. "`1") is appended.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.NormalizeDocId(System.String)">
+            <summary>
+            Normalizes a documentation comment ID to match the compiler-style format.
+            Strips the return type suffix for ordinary methods but retains it for conversion operators.
+            </summary>
+            <param name="docId">The documentation comment ID to normalize.</param>
+            <returns>The normalized documentation comment ID.</returns>
         </member>
     </members>
 </doc>

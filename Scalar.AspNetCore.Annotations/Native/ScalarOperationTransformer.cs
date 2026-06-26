@@ -1,15 +1,17 @@
 
 #if NET9_0_OR_GREATER
 
+using Scalar.AspNetCore.Annotations.Attributes;
+using Microsoft.AspNetCore.OpenApi;
+using System.Text.Json.Nodes;
+
+
+#if NET9_0
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
-using Scalar.AspNetCore.Annotations.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.OpenApi;
+#elif NET10_0_OR_GREATER
+using Microsoft.OpenApi;
+#endif
 
 
 namespace Scalar.AspNetCore.Annotations.Native;
@@ -46,23 +48,31 @@ public class ScalarOperationTransformer : IOpenApiOperationTransformer
             if (!string.IsNullOrEmpty(scalarOp.OperationId))
                 operation.OperationId = scalarOp.OperationId;
 
-            if (scalarOp.Tags != null && scalarOp.Tags.Any())
+            if (scalarOp.Tags?.Any() is true)
             {
-                operation.Tags = scalarOp.Tags.Select(t => new OpenApiTag { Name = t }).ToList();
+#if NET10_0 
+                operation.Tags = (ISet<OpenApiTagReference>?)scalarOp.Tags.Select(selector: t => new OpenApiTagReference(referenceId: t)).ToList();
+#elif NET9_0
+                operation.Tags = [.. scalarOp.Tags.Select(selector: t => new OpenApiTag() { Name = t })];
+#endif
             }
 
             if (!string.IsNullOrEmpty(scalarOp.ThemeColor))
             {
                 // In Scalar, color isn't a native property, so we use their recognized x-extension or tag it
+#if NET9_0
                 operation.Extensions["x-scalar-color"] = new OpenApiString(scalarOp.ThemeColor);
+
+#elif  NET10_0
+                operation.Extensions?["x-scalar-color"] = new JsonNodeExtension(JsonValue.Create(scalarOp.ThemeColor));
+#endif
             }
         }
 
         var scalarResponse = metadata.OfType<ScalarResponseAttribute>().ToList();
 
-        if ( scalarResponse != null)
-        {
-            scalarResponse.ForEach(r =>
+#if NET9_0 || NET10_0
+        scalarResponse?.ForEach(r =>
             {
                 var statusCode = r.StatusCode.ToString();
                 if (operation.Responses.ContainsKey(statusCode))
@@ -73,18 +83,25 @@ public class ScalarOperationTransformer : IOpenApiOperationTransformer
                         response.Description = r.Description;
                     }
 
-                    if(!string.IsNullOrEmpty(r.ContentTypes?.FirstOrDefault()))
+                    if (!string.IsNullOrEmpty(r.ContentTypes?.FirstOrDefault()))
                     {
-                        response.Content = r.ContentTypes.ToDictionary(ct => ct, ct => new OpenApiMediaType());
+                        foreach (var ct in r.ContentTypes)
+                        {
+                            if (!response.Content.ContainsKey(ct))
+                            {
+                                response.Content[ct] = new OpenApiMediaType();
+                            }
+                        }
+                        //response.Content = r.ContentTypes.ToDictionary(ct => ct, ct => new OpenApiMediaType());
                     }
                 }
             });
-        }
-
+#endif
         // 1. Handle Badges
         var badges = metadata.OfType<ScalarBadgeAttribute>().ToList();
-        if (badges.Any())
+        if (badges.Count > 0)
         {
+#if NET8_0
             var badgeArray = new OpenApiArray();
             foreach (var badge in badges)
             {
@@ -97,12 +114,14 @@ public class ScalarOperationTransformer : IOpenApiOperationTransformer
                 });
             }
             operation.Extensions["x-badges"] = badgeArray;
+#endif
         }
 
         // 2. Handle Code Samples
         var codeSamples = metadata.OfType<ScalarCodeSampleAttribute>().ToList();
-        if (codeSamples.Any())
+        if (codeSamples.Count > 0)
         {
+#if NET8_0
             var sampleArray = new OpenApiArray();
             foreach (var sample in codeSamples)
             {
@@ -114,15 +133,21 @@ public class ScalarOperationTransformer : IOpenApiOperationTransformer
                 });
             }
             operation.Extensions["x-codeSamples"] = sampleArray;
+#endif
         }
 
         // 3. Handle Exclusions
         if (metadata.OfType<ScalarExcludeAttribute>().Any())
         {
+#if NET8_0
             operation.Extensions["x-scalar-ignore"] = new OpenApiBoolean(true);
+#endif
         }
 
         return Task.CompletedTask;
     }
 }
 #endif
+
+
+

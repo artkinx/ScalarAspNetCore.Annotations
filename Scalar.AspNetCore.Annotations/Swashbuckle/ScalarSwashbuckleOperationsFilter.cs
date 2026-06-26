@@ -1,13 +1,19 @@
-﻿using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
-using Scalar.AspNetCore.Annotations.Attributes;
-using Swashbuckle.AspNetCore.SwaggerGen;
+﻿#if NET9_0_OR_GREATER
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Reflection;
+using System.Text.Json.Nodes;
+using System.Threading.Tasks;
+#if NET9_0
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
+#elif NET10_0
+using Microsoft.OpenApi;
+#endif
+using Scalar.AspNetCore.Annotations.Attributes;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 
 namespace Scalar.AspNetCore.Annotations.Swashbuckle;
@@ -34,12 +40,20 @@ public class ScalarSwashbuckleOperationFilter : IOperationFilter
 
             if (scalarOperation.Tags != null && scalarOperation.Tags.Any())
             {
+#if NET9_0
                 operation.Tags = scalarOperation.Tags.Select(t => new OpenApiTag { Name = t }).ToList();
+#elif NET10_0
+                operation.Tags = (ISet<OpenApiTagReference>?)scalarOperation.Tags.Select(selector: t => new OpenApiTagReference(referenceId: t)).ToList();
+#endif
             }
 
             if (!string.IsNullOrEmpty(scalarOperation.ThemeColor))
             {
+#if NET9_0
                 operation.Extensions["x-scalar-color"] = new OpenApiString(scalarOperation.ThemeColor);
+#elif NET10_0
+                operation.Extensions?["x-scalar-color"] = new JsonNodeExtension(JsonValue.Create(scalarOperation.ThemeColor));
+#endif
             }
         }
 
@@ -47,13 +61,18 @@ public class ScalarSwashbuckleOperationFilter : IOperationFilter
         var excludeAttribute = context.MethodInfo.GetCustomAttribute<ScalarExcludeAttribute>();
         if (excludeAttribute != null)
         {
+#if NET9_0
             operation.Extensions["x-scalar-ignore"] = new OpenApiBoolean(true);
+#elif NET10_0
+               operation.Extensions?["x-scalar-ignore"] = new JsonNodeExtension(JsonValue.Create(true));
+#endif
         }
 
         // 3. Handle ScalarCodeSampleAttribute
         var codeSamples = context.MethodInfo.GetCustomAttributes<ScalarCodeSampleAttribute>().ToList();
-        if (codeSamples.Any())
+        if (codeSamples.Count > 0)
         {
+#if NET9_0
             var sampleArray = new OpenApiArray();
             foreach (var sample in codeSamples)
             {
@@ -65,6 +84,20 @@ public class ScalarSwashbuckleOperationFilter : IOperationFilter
                 });
             }
             operation.Extensions["x-codeSamples"] = sampleArray;
+#elif NET10_0
+            var sampleArray = new List<dynamic>();
+
+            foreach (var sample in codeSamples)
+            {
+               sampleArray.Add(new Dictionary<string, dynamic>
+               {
+                    ["lang"] =  new JsonNodeExtension(JsonValue.Create(sample.Language)),
+                    ["source"] =  new JsonNodeExtension(JsonValue.Create(sample.Code)),
+                    ["label"] =  new JsonNodeExtension(JsonValue.Create(sample.Title)),
+               });
+            }
+#endif
         }
     }
 }
+#endif
