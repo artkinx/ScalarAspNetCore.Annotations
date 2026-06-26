@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QWA2MB45SZs=",
+  "dgSpecHash": "/bYf3+WnNS8=",
   "success": true,
-  "projectFilePath": "c:\\projects\\priv\\Artkinx.ScalarAspNetCore.Annotations\\Artkinx.ScalarAspNetCore.Annotations\\Artkinx.ScalarAspNetCore.Annotations.csproj",
+  "projectFilePath": "C:\\projects\\priv\\Scalar.AspNetCore.Annotations\\Artkinx.ScalarAspNetCore.Annotations\\Artkinx.ScalarAspNetCore.Annotations.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\artki\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.27\\microsoft.aspnetcore.openapi.8.0.27.nupkg.sha512",
     "C:\\Users\\artki\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.16\\microsoft.aspnetcore.openapi.9.0.16.nupkg.sha512",

@@ -1,8 +1,0 @@
-C:\projects\priv\Artkinx.ScalarAspNetCore.Annotations\Artkinx.ScalarAspNetCore.Annotations\bin\Release\net10.0\publish\Artkinx.ScalarAspNetCore.Annotations.dll
-C:\projects\priv\Artkinx.ScalarAspNetCore.Annotations\Artkinx.ScalarAspNetCore.Annotations\bin\Release\net10.0\publish\Artkinx.ScalarAspNetCore.Annotations.deps.json
-C:\projects\priv\Artkinx.ScalarAspNetCore.Annotations\Artkinx.ScalarAspNetCore.Annotations\bin\Release\net10.0\publish\Artkinx.ScalarAspNetCore.Annotations.pdb
-C:\projects\priv\Artkinx.ScalarAspNetCore.Annotations\Artkinx.ScalarAspNetCore.Annotations\bin\Release\net10.0\publish\Microsoft.AspNetCore.OpenApi.dll
-C:\projects\priv\Artkinx.ScalarAspNetCore.Annotations\Artkinx.ScalarAspNetCore.Annotations\bin\Release\net10.0\publish\Microsoft.OpenApi.dll
-C:\projects\priv\Artkinx.ScalarAspNetCore.Annotations\Artkinx.ScalarAspNetCore.Annotations\bin\Release\net10.0\publish\Swashbuckle.AspNetCore.Swagger.dll
-C:\projects\priv\Artkinx.ScalarAspNetCore.Annotations\Artkinx.ScalarAspNetCore.Annotations\bin\Release\net10.0\publish\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\projects\priv\Artkinx.ScalarAspNetCore.Annotations\Artkinx.ScalarAspNetCore.Annotations\bin\Release\net10.0\publish\Artkinx.ScalarAspNetCore.Annotations.xml

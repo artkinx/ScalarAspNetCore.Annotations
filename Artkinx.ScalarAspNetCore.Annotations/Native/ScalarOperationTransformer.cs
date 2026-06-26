@@ -51,7 +51,7 @@ public class ScalarOperationTransformer : IOpenApiOperationTransformer
             if (scalarOp.Tags?.Any() is true)
             {
 #if NET10_0 
-                operation.Tags = (ISet<OpenApiTagReference>?)scalarOp.Tags.Select(selector: t => new OpenApiTagReference(referenceId: t)).ToList();
+                operation.Tags = scalarOp.Tags.Select(selector: t => new OpenApiTagReference(referenceId: t)).ToHashSet();
 #elif NET9_0
                 operation.Tags = [.. scalarOp.Tags.Select(selector: t => new OpenApiTag() { Name = t })];
 #endif
