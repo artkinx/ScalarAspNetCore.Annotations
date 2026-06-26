@@ -1,6 +1,6 @@
-# Scalar.AspNetCore.Annotations
+# Artkinx.ScalarAspNetCore.Annotations
 
-`Scalar.AspNetCore.Annotations` provides declarative attributes for configuring and enhancing [Scalar](https://github.com/scalar/scalar) OpenAPI documentation in ASP.NET Core applications. It supports both **Swashbuckle** and the **Native OpenAPI** generation built into .NET 9+.
+`Artkinx.ScalarAspNetCore.Annotations` provides declarative attributes for configuring and enhancing [Scalar](https://github.com/scalar/scalar) OpenAPI documentation in ASP.NET Core applications. It supports both **Swashbuckle** and the **Native OpenAPI** generation built into .NET 9+.
 
 ## Overview
 
@@ -11,7 +11,7 @@ Scalar offers a beautiful API reference UI. This package lets you enrich your Op
 Install the package via NuGet:
 
 ```bash
-dotnet add package Scalar.AspNetCore.Annotations
+dotnet add package Artkinx.ScalarAspNetCore.Annotations
 ```
 
 ## Setup
@@ -21,7 +21,7 @@ Depending on the OpenAPI generator you are using, you need to register the annot
 ### With Swashbuckle
 
 ```csharp
-using Scalar.AspNetCore.Annotations.Swashbuckle;
+using Artkinx.ScalarAspNetCore.Annotations.Swashbuckle;
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -33,7 +33,7 @@ builder.Services.AddSwaggerGen(options =>
 ### With .NET 9+ Native OpenAPI
 
 ```csharp
-using Scalar.AspNetCore.Annotations.Native;
+using Artkinx.ScalarAspNetCore.Annotations.Native;
 
 builder.Services.AddOpenApi(options =>
 {
